@@ -16,6 +16,8 @@ public abstract class SingleThreadEventExecutor implements Executor {
 
     private volatile Thread thread;
 
+    private Executor executor;
+
     private Queue<Runnable> taskQueue;
 
     /**
@@ -61,9 +63,22 @@ public abstract class SingleThreadEventExecutor implements Executor {
         startThread();
     }
 
-    private void startThread() {
+    protected abstract void run();
 
+
+    private void doStartThread() {
+        executor.execute(() -> {
+            // 保存EventLoop线程
+            thread = Thread.currentThread();
+            // 下面这段代码有点难理解
+            SingleThreadEventExecutor.this.run();
+        });
     }
+
+    private void startThread() {
+        doStartThread();
+    }
+
 
 
 }
