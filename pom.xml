@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>netty-01</module>
+        <module>netty-02</module>
     </modules>
 
     <properties>
