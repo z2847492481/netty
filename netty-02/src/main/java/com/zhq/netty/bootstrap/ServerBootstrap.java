@@ -52,7 +52,7 @@ public class ServerBootstrap {
      * @param localAddress
      */
     private void doBind(SocketAddress localAddress) {
-        // 注册selector
+        // 把serverSocketChannel注册到selector上去监听客户端的连接事件
         nioEventLoop.register(serverSocketChannel,this.nioEventLoop);
         // 启动服务器
         doBind0(localAddress);
@@ -62,7 +62,7 @@ public class ServerBootstrap {
         nioEventLoop.execute(() -> {
             try {
                 serverSocketChannel.bind(localAddress);
-                logger.info("服务端channel和端口号绑定了");
+                logger.info("server已绑定端口!");
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }

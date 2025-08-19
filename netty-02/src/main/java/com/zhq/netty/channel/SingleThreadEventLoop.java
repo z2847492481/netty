@@ -34,7 +34,7 @@ public abstract class SingleThreadEventLoop extends SingleThreadEventExecutor {
         } else {
             nioEventLoop.execute(() -> {
                 register0(channel, nioEventLoop);
-                logger.info("服务器的channel已注册到多路复用器上了！:{}",Thread.currentThread().getName());
+                logger.info("ServerSocketChannel已经注册到selector上，正在监听客户端的连接事件...");
             });
         }
     }

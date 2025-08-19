@@ -109,6 +109,7 @@ public abstract class SingleThreadEventExecutor implements Executor {
     private synchronized void startThread() {
         if (state == 0) {
             doStartThread();
+            state = 1;
         }
     }
 
