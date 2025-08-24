@@ -10,3 +10,5 @@ use raw nio to implement a simple server and client.
 core class:
 1. BootStrap and ServerBootStrap
 2. NioEventLoop, SingleThreadEventLoop and SingleThreadEventExecutor
+
+# chapter 3
