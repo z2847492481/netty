@@ -1,6 +1,7 @@
 package com.zhq.netty.bootstrap;
 
 import com.zhq.netty.channel.nio.NioEventLoop;
+import com.zhq.netty.channel.nio.NioEventLoopGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,14 +19,16 @@ public class Bootstrap {
 
     private NioEventLoop nioEventLoop;
 
+    private NioEventLoopGroup nioEventLoopGroup;
+
     private SocketChannel socketChannel;
 
     public Bootstrap() {
 
     }
 
-    public Bootstrap setNioEventLoop(NioEventLoop nioEventLoop) {
-        this.nioEventLoop = nioEventLoop;
+    public Bootstrap setNioEventLoopGroup(NioEventLoopGroup nioEventLoopGroup) {
+        this.nioEventLoopGroup = nioEventLoopGroup;
         return this;
     }
 
@@ -43,6 +46,8 @@ public class Bootstrap {
     }
 
     private void doConnect(SocketAddress localAddress) {
+        // 先从nio线程组中获取一个线程
+        nioEventLoop = nioEventLoopGroup.next();
         //注册任务先提交
         nioEventLoop.register(socketChannel,this.nioEventLoop);
         //然后再提交连接服务器任务

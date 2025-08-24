@@ -12,12 +12,17 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.Executor;
 
 /**
+ * 提供register方法
  * @author zhq123
  * @date 2025/8/17
  **/
 public abstract class SingleThreadEventLoop extends SingleThreadEventExecutor {
 
     private static final Logger logger = LoggerFactory.getLogger(SingleThreadEventLoop.class);
+
+    public SingleThreadEventLoop(){
+        super();
+    }
 
     protected SingleThreadEventLoop(Executor executor, EventLoopTaskQueueFactory queueFactory) {
         super(executor, queueFactory, new DefaultThreadFactory());

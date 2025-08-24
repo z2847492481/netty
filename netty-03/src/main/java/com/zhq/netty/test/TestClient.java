@@ -12,10 +12,5 @@ import java.nio.channels.SocketChannel;
  **/
 public class TestClient {
     public static void main(String[] args) throws IOException {
-        SocketChannel socketChannel = SocketChannel.open();
-        Bootstrap bootstrap = new Bootstrap();
-        bootstrap.setNioEventLoop(new NioEventLoop(null,socketChannel)).
-                setSocketChannel(socketChannel);
-        bootstrap.connect("127.0.0.1",8081);
     }
 }

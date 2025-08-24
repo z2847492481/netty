@@ -10,6 +10,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 
 /**
+ * 实现Executor接口，作为一个单线程的线程池来执行任务
  * @author zhq123
  * @date 2025/8/17
  **/
@@ -35,6 +36,10 @@ public abstract class SingleThreadEventExecutor implements Executor {
      * 线程状态，0表示未启动，1表示已启动
      */
     private volatile int state = 0;
+
+    public SingleThreadEventExecutor() {
+        this(null, null, null);
+    }
 
     protected SingleThreadEventExecutor(Executor executor, EventLoopTaskQueueFactory queueFactory, ThreadFactory threadFactory) {
         this(executor, queueFactory, threadFactory, RejectedExecutionHandlers.reject());

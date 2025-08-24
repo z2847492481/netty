@@ -35,6 +35,10 @@ public class NioEventLoop extends SingleThreadEventLoop {
 
     private SelectorProvider provider;
 
+    public NioEventLoop() {
+        super();
+    }
+
     public NioEventLoop(ServerSocketChannel serverSocketChannel, SocketChannel socketChannel) {
         this(null, SelectorProvider.provider(), null, serverSocketChannel, socketChannel);
     }
