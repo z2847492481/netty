@@ -48,21 +48,20 @@ public class Bootstrap {
     private void doConnect(SocketAddress localAddress) {
         // 先从nio线程组中获取一个线程
         nioEventLoop = nioEventLoopGroup.next();
-        //注册任务先提交
+        // 设置SocketChannel 用于后续处理事件时判断
+        nioEventLoop.setSocketChannel(socketChannel);
+        // 注册SocketChannel
         nioEventLoop.register(socketChannel,this.nioEventLoop);
-        //然后再提交连接服务器任务
+        // 连接服务端
         doConnect0(localAddress);
     }
 
     private void doConnect0(SocketAddress localAddress) {
-        nioEventLoop.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    socketChannel.connect(localAddress);
-                } catch (Exception e) {
-                    logger.error(e.getMessage());
-                }
+        nioEventLoop.execute(() -> {
+            try {
+                socketChannel.connect(localAddress);
+            } catch (Exception e) {
+                logger.error(e.getMessage());
             }
         });
     }

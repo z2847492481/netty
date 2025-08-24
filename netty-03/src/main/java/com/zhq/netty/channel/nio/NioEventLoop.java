@@ -58,6 +58,14 @@ public class NioEventLoop extends SingleThreadEventLoop {
         this.selector = openSelector();
     }
 
+    public void setSocketChannel(SocketChannel socketChannel) {
+        this.socketChannel = socketChannel;
+    }
+
+    public void setServerSocketChannel(ServerSocketChannel serverSocketChannel) {
+        this.serverSocketChannel = serverSocketChannel;
+    }
+
     public void setWorker(NioEventLoop worker) {
         this.worker = worker;
     }
