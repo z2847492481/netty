@@ -37,14 +37,14 @@ public abstract class SingleThreadEventExecutor implements Executor {
     private volatile int state = 0;
 
     protected SingleThreadEventExecutor(Executor executor, EventLoopTaskQueueFactory queueFactory, ThreadFactory threadFactory) {
-        this(executor,queueFactory,threadFactory, RejectedExecutionHandlers.reject());
+        this(executor, queueFactory, threadFactory, RejectedExecutionHandlers.reject());
     }
 
-    protected SingleThreadEventExecutor(Executor executor,EventLoopTaskQueueFactory queueFactory,ThreadFactory threadFactory,RejectedExecutionHandler rejectedExecutionHandler) {
+    protected SingleThreadEventExecutor(Executor executor, EventLoopTaskQueueFactory queueFactory, ThreadFactory threadFactory, RejectedExecutionHandler rejectedExecutionHandler) {
         if (executor == null) {
             this.executor = new ThreadPerTaskExecutor(threadFactory);
         }
-        this.taskQueue = queueFactory == null? newTaskQueue(DEFAULT_MAX_PENDING_TASKS):queueFactory.newTaskQueue(DEFAULT_MAX_PENDING_TASKS);
+        this.taskQueue = queueFactory == null ? newTaskQueue(DEFAULT_MAX_PENDING_TASKS) : queueFactory.newTaskQueue(DEFAULT_MAX_PENDING_TASKS);
         this.rejectedExecutionHandler = rejectedExecutionHandler;
     }
 
@@ -127,7 +127,7 @@ public abstract class SingleThreadEventExecutor implements Executor {
         if (task == null) {
             return;
         }
-        for (;;) {
+        for (; ; ) {
             //执行任务队列中的任务
             safeExecute(task);
             //执行完毕之后，拉取下一个任务，如果为null就直接返回

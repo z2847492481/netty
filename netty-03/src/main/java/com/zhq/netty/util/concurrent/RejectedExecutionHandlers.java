@@ -12,7 +12,8 @@ public class RejectedExecutionHandlers {
         throw new RejectedExecutionException();
     };
 
-    private RejectedExecutionHandlers() { }
+    private RejectedExecutionHandlers() {
+    }
 
 
     public static RejectedExecutionHandler reject() {

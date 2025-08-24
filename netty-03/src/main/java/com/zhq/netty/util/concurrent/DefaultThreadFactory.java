@@ -83,7 +83,7 @@ public class DefaultThreadFactory implements ThreadFactory {
 
     @Override
     public Thread newThread(Runnable r) {
-        Thread t = new Thread( r,prefix + nextId.incrementAndGet());
+        Thread t = new Thread(r, prefix + nextId.incrementAndGet());
         logger.info(t.toString());
         try {
             if (t.isDaemon() != daemon) {
@@ -94,7 +94,7 @@ public class DefaultThreadFactory implements ThreadFactory {
                 t.setPriority(priority);
             }
         } catch (Exception exception) {
-            logger.error("创建线程失败:{}",exception.getMessage());
+            logger.error("创建线程失败:{}", exception.getMessage());
         }
         return t;
     }
